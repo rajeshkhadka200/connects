@@ -5,6 +5,7 @@ import {
   TextInput,
   ScrollView,
   SafeAreaView,
+  FlatList,
 } from "react-native";
 import { useState } from "react";
 import Globalstyle from "../styles/Globalstyle.js";
@@ -12,6 +13,7 @@ import React from "react";
 import { styles } from "../styles/HomeStyle.js";
 import { FontAwesome } from "@expo/vector-icons";
 import HomeCategoryCard from "../components/HomeCategoryCard.js";
+import HomeEventCard from "../components/HomeEventCard.js";
 export default function Home() {
   const [category, setcategory] = useState([
     {
@@ -47,46 +49,67 @@ export default function Home() {
     },
   ]);
   return (
-    <ScrollView style={Globalstyle.androidSafeArea}>
-      <View style={{ paddingHorizontal: 13 }}>
-        <View style={styles.header_con}>
-          <Text style={styles.header_text}>Let's Discover</Text>
-          <View style={styles.img_con}>
-            <Image
-              style={styles.img}
-              source={require("../assets/avatar.png")}
+    <ScrollView>
+      <View style={Globalstyle.androidSafeArea}>
+        <View style={{ paddingHorizontal: 13 }}>
+          <View style={styles.header_con}>
+            <Text style={styles.header_text}>Let's Discover</Text>
+            <View style={styles.img_con}>
+              <Image
+                style={styles.img}
+                source={require("../assets/avatar.png")}
+              />
+            </View>
+          </View>
+
+          {/* search */}
+          <View style={styles.searchBar}>
+            <FontAwesome name="search" size={24} color="grey" />
+            <TextInput
+              style={styles.input}
+              placeholder="Search the local business"
             />
           </View>
-        </View>
 
-        {/* search */}
-        <View style={styles.searchBar}>
-          <FontAwesome name="search" size={24} color="grey" />
-          <TextInput
-            style={styles.input}
-            placeholder="Search the local business"
-          />
-        </View>
-
-        {/* categoryyyyy */}
-        <View style={styles.cate_con}>
-          <View>
-            <Text style={styles.cate_heading}>Categories</Text>
+          {/* categoryyyyy */}
+          <View style={styles.cate_con}>
+            <View>
+              <Text style={styles.cate_heading}>Categories</Text>
+            </View>
+            <View>
+              <Text style={styles.cate_see_all}>See all</Text>
+            </View>
           </View>
-          <View>
-            <Text style={styles.cate_see_all}>See all</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {category.map((item) => (
+              <HomeCategoryCard
+                key={item.id}
+                id={item.id}
+                image={item.image}
+                name={item.name}
+              />
+            ))}
+          </ScrollView>
+          {/* up comming event  */}
+          <View style={styles.cate_con}>
+            <View>
+              <Text style={styles.cate_heading}>Upcoming Events</Text>
+            </View>
+            <View>
+              <Text style={styles.cate_see_all}>See all</Text>
+            </View>
           </View>
+          {/* events cards */}
+          <ScrollView
+            // snapToInterval={60}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          >
+            {category.map((item) => (
+              <HomeEventCard key={item.id} />
+            ))}
+          </ScrollView>
         </View>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {category.map((item) => (
-            <HomeCategoryCard
-              key={item.id}
-              id={item.id}
-              image={item.image}
-              name={item.name}
-            />
-          ))}
-        </ScrollView>
       </View>
     </ScrollView>
   );
