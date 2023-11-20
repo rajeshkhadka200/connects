@@ -3,12 +3,12 @@ import React from "react";
 import { View, Text, Image } from "react-native";
 import { styles } from "../styles/HomeCategoryCardStyle.js";
 
-export default function HomeCategoryCard({ id, image, name }) {
+export default function HomeCategoryCard({ id, cate_image, name }) {
   return (
     <View style={styles.container}>
       <Image
         source={{
-          uri: image,
+          uri: cate_image,
         }}
         style={styles.image}
       />

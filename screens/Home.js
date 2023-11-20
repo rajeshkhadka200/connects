@@ -1,15 +1,7 @@
-import {
-  Text,
-  View,
-  Image,
-  TextInput,
-  ScrollView,
-  SafeAreaView,
-  FlatList,
-} from "react-native";
+import React from "react";
+import { Text, View, Image, TextInput, ScrollView } from "react-native";
 import { useState } from "react";
 import Globalstyle from "../styles/Globalstyle.js";
-import React from "react";
 import { styles } from "../styles/HomeStyle.js";
 import { FontAwesome } from "@expo/vector-icons";
 import HomeCategoryCard from "../components/HomeCategoryCard.js";
@@ -18,34 +10,59 @@ export default function Home() {
   const [category, setcategory] = useState([
     {
       id: 1,
-      image:
+      cate_image:
         "https://bl-i.thgim.com/public/opinion/rgb32v/article28562857.ece/alternates/FREE_1200/BL19THINK2FERTILISER5",
       name: "Agriculture",
     },
     {
       id: 4,
-      image:
+      cate_image:
         "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?cs=srgb&dl=pexels-ella-olsson-1640772.jpg&fm=jpg",
       name: "Resturants",
     },
     {
       id: 2,
-      image:
+      cate_image:
         "https://i.pinimg.com/736x/84/70/94/847094a5d2df67f4fc7a7a6b77bcfe7b.jpg",
       name: "Travels",
     },
     {
       id: 3,
-      image:
+      cate_image:
         "https://wallpapers.com/images/hd/plumbing-1500-x-700-picture-8xzg8nm0ql3dg9qr.jpg",
       name: "Services",
     },
 
     {
       id: 5,
-      image:
+      cate_image:
         "https://media.istockphoto.com/id/1446229465/photo/red-heart-and-stethoscope-are-on-blue-background.webp?b=1&s=170667a&w=0&k=20&c=1-aE7XV24f8qVr8fGnpvypir8fSxYaM9sHZurKoutj8=",
       name: "Health",
+    },
+  ]);
+
+  // event card
+  const [event, setEvent] = useState([
+    {
+      id: 1,
+      tittle: "Arijit Singh Live in Concert",
+      banner: "https://exclaim.ca/images/honeyjamconcert_editorial.jpg",
+      profile:
+        "https://scontent.fbhr4-1.fna.fbcdn.net/v/t39.30808-6/368234669_1011834293341769_8835376727035243512_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=JXMxwj6-xssAX9D7bfp&_nc_ht=scontent.fbhr4-1.fna&oh=00_AfBQgN7QG3kcqQIgNeFmElBK2F1wewFNPPTrnfQdjOZgGQ&oe=65619CF1",
+      date: "2021-09-12",
+      location: "Kathmandu",
+      price: "Rs.5000",
+    },
+    {
+      id: 2,
+      tittle: "Arijit Singh Live in Concert",
+      banner:
+        "https://media.insider.in/image/upload/c_crop,g_custom/v1651037876/js8fhetpguw6s08cfrg4.jpg",
+      profile:
+        "https://scontent.fbhr4-1.fna.fbcdn.net/v/t39.30808-6/368234669_1011834293341769_8835376727035243512_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=JXMxwj6-xssAX9D7bfp&_nc_ht=scontent.fbhr4-1.fna&oh=00_AfBQgN7QG3kcqQIgNeFmElBK2F1wewFNPPTrnfQdjOZgGQ&oe=65619CF1",
+      date: "2021-09-12",
+      location: "Kathmandu",
+      price: "Rs.5000",
     },
   ]);
   return (
@@ -85,8 +102,9 @@ export default function Home() {
               <HomeCategoryCard
                 key={item.id}
                 id={item.id}
-                image={item.image}
+                cate_image={item.cate_image}
                 name={item.name}
+                date={item.date}
               />
             ))}
           </ScrollView>
@@ -100,13 +118,17 @@ export default function Home() {
             </View>
           </View>
           {/* events cards */}
-          <ScrollView
-            // snapToInterval={60}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          >
-            {category.map((item) => (
-              <HomeEventCard key={item.id} />
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {event.map((item) => (
+              <HomeEventCard
+                key={item.id}
+                id={item.id}
+                banner={item.banner}
+                profile={item.profile}
+                tittle={item.tittle}
+                price={item.price}
+                address={item.address}
+              />
             ))}
           </ScrollView>
         </View>

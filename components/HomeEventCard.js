@@ -3,7 +3,14 @@ import React from "react";
 import { View, Text, Image, TouchableWithoutFeedback } from "react-native";
 import { styles } from "../styles/HomeEventCardStyle.js";
 
-export default function HomeEventCard() {
+export default function HomeEventCard({
+  tittle,
+  banner,
+  profile,
+  date,
+  location,
+  price,
+}) {
   return (
     <View
       style={{
@@ -16,7 +23,7 @@ export default function HomeEventCard() {
       <TouchableWithoutFeedback>
         <Image
           source={{
-            uri: "https://gighub-563e.kxcdn.com/mediafiles/cache/94/a9/94a9ad1bd1bd9515c4a9630ae81b1e8f.webp",
+            uri: banner,
           }}
           style={styles.img}
         />
@@ -27,13 +34,13 @@ export default function HomeEventCard() {
             <Image
               style={styles.avatar}
               source={{
-                uri: "https://gighub-563e.kxcdn.com/mediafiles/cache/94/a9/94a9ad1bd1bd9515c4a9630ae81b1e8f.webp",
+                uri: profile,
               }}
             />
           </View>
           <View>
-            <Text style={styles.dec_address}> Butwal</Text>
-            <Text style={styles.dec_price}>Rs.5000</Text>
+            <Text style={styles.dec_address}> {location}</Text>
+            <Text style={styles.dec_price}>{price}</Text>
           </View>
         </View>
       </View>

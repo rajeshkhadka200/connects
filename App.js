@@ -1,11 +1,10 @@
-import { Text, Platform, View, SafeAreaView } from "react-native";
-import { Home, Feed, Event, Profile, Post } from "./screens";
+import { Text, Platform, View } from "react-native";
+import { Home, Feed, Event, Profile, Post, Auth } from "./screens";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
 
 const Tab = createBottomTabNavigator();
 const screenOptions = {
@@ -107,7 +106,7 @@ export default function App() {
         />
         <Tab.Screen
           name="Profile"
-          component={Profile}
+          component={Auth}
           options={{
             tabBarIcon: ({ focused }) => {
               return (
@@ -115,7 +114,7 @@ export default function App() {
                   style={{ alignItems: "center", justifyContent: "center" }}
                 >
                   <AntDesign name="user" size={24} color="black" />
-                  <Text style={{ fonSize: 12, color: "#16247d" }}>Profile</Text>
+                  <Text style={{ fonSize: 12, color: "#16247d" }}>User</Text>
                 </View>
               );
             },
