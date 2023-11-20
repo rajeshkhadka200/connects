@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
 
 const Tab = createBottomTabNavigator();
 const screenOptions = {
@@ -24,6 +25,7 @@ const screenOptions = {
 export default function App() {
   return (
     // <SafeAreaView>
+
     <NavigationContainer>
       <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen
