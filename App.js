@@ -24,8 +24,6 @@ const screenOptions = {
 
 export default function App() {
   return (
-    // <SafeAreaView>
-
     <NavigationContainer>
       <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen
@@ -40,7 +38,7 @@ export default function App() {
                   <Entypo
                     name="home"
                     size={24}
-                    color={focused ? "#16247d" : "#111"}
+                    color={focused ? "#f4b400" : "#111"}
                   />
                   <Text style={{ fonSize: 12, color: "#16247d" }}>HOME</Text>
                 </View>
@@ -78,7 +76,7 @@ export default function App() {
                   style={{
                     alignItems: "center",
                     justifyContent: "center",
-                    backgroundColor: "#16247d",
+                    backgroundColor: "#f4b400",
                     width: Platform.OS == "ios" ? 50 : 60,
                     height: Platform.OS == "ios" ? 50 : 60,
                     top: Platform.OS == "ios" ? -10 : -20,

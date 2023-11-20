@@ -1,12 +1,10 @@
 import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   header_con: {
-    // paddingHorizontal: 10,
     flexDirection: "row",
     justifyContent: "space-between",
-    // backgroundColor: "red",
-    marginTop: 15,
     alignItems: "center",
+    marginTop: 30,
   },
   header_text: {
     // font milauna xa
@@ -22,18 +20,30 @@ export const styles = StyleSheet.create({
   searchBar: {
     marginTop: 30,
     borderRadius: 20,
-    backgroundColor: "#ffffff",
-    paddingHorizontal: 10,
+    backgroundColor: "rgba(128, 128, 128, 0.302)",
+    paddingHorizontal: 25,
     paddingVertical: 20,
     flexDirection: "row",
     alignItems: "center",
   },
-  //   searchIcon: {
-  //     // paddingRight: 25,
-  //   },
+
   input: {
     flex: 1,
     fontSize: 18,
     paddingLeft: 10,
+  },
+  // category heading style
+  cate_con: {
+    marginTop: 35,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 30,
+  },
+  cate_heading: {
+    fontSize: 18,
+  },
+  cate_see_all: {
+    fontSize: 18,
+    color: "#f4b400",
   },
 });
