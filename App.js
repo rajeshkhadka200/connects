@@ -1,5 +1,5 @@
 import { Text, Platform, View } from "react-native";
-import { Home, Feed, Event, Profile, Post, Auth } from "./screens";
+import { Home, Feed, Event, Profile, Post, Register } from "./screens";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo } from "@expo/vector-icons";
@@ -37,9 +37,16 @@ export default function App() {
                   <Entypo
                     name="home"
                     size={24}
-                    color={focused ? "#f4b400" : "#111"}
+                    color={focused ? "#f4b400" : "rgba(0, 0, 0, 0.3)"}
                   />
-                  <Text style={{ fonSize: 12, color: "#16247d" }}>HOME</Text>
+                  <Text
+                    style={{
+                      fonSize: 12,
+                      color: focused ? "#f4b400" : "rgba(0, 0, 0, 0.3)",
+                    }}
+                  >
+                    Home
+                  </Text>
                 </View>
               );
             },
@@ -57,9 +64,16 @@ export default function App() {
                   <Entypo
                     name="wallet"
                     size={24}
-                    color={focused ? "#16247d" : "#111"}
+                    color={focused ? "#f4b400" : "rgba(0, 0, 0, 0.3)"}
                   />
-                  <Text style={{ fonSize: 12, color: "#16247d" }}>Feed</Text>
+                  <Text
+                    style={{
+                      fonSize: 12,
+                      color: focused ? "#f4b400" : "rgba(0, 0, 0, 0.3)",
+                    }}
+                  >
+                    Feed
+                  </Text>
                 </View>
               );
             },
@@ -97,8 +111,19 @@ export default function App() {
                 <View
                   style={{ alignItems: "center", justifyContent: "center" }}
                 >
-                  <MaterialIcons name="event" size={24} color="black" />
-                  <Text style={{ fonSize: 12, color: "#16247d" }}>Event</Text>
+                  <MaterialIcons
+                    name="event"
+                    size={24}
+                    color={focused ? "#f4b400" : "rgba(0, 0, 0, 0.3)"}
+                  />
+                  <Text
+                    style={{
+                      fonSize: 12,
+                      color: focused ? "#f4b400" : "rgba(0, 0, 0, 0.3)",
+                    }}
+                  >
+                    Event
+                  </Text>
                 </View>
               );
             },
@@ -106,15 +131,26 @@ export default function App() {
         />
         <Tab.Screen
           name="Profile"
-          component={Auth}
+          component={Register}
           options={{
             tabBarIcon: ({ focused }) => {
               return (
                 <View
                   style={{ alignItems: "center", justifyContent: "center" }}
                 >
-                  <AntDesign name="user" size={24} color="black" />
-                  <Text style={{ fonSize: 12, color: "#16247d" }}>User</Text>
+                  <AntDesign
+                    name="user"
+                    size={24}
+                    color={focused ? "#f4b400" : "rgba(0, 0, 0, 0.3)"}
+                  />
+                  <Text
+                    style={{
+                      fonSize: 12,
+                      color: focused ? "#f4b400" : "rgba(0, 0, 0, 0.3)",
+                    }}
+                  >
+                    User
+                  </Text>
                 </View>
               );
             },

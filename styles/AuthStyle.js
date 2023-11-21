@@ -5,13 +5,13 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 150,
+    marginTop: 100,
   },
   brand_name: {
     textAlign: "center",
     // fontFamily: "600",
     // fontFamily: "888",
-    fontSize: 40,
+    fontSize: 35,
     marginBottom: 40,
     color: "#000",
     marginTop: 20,
@@ -45,5 +45,22 @@ export const styles = StyleSheet.create({
   btn_img: {
     height: 30,
     width: 30,
+  },
+  //   search
+  searchBar: {
+    marginTop: 15,
+    borderRadius: 20,
+    backgroundColor: "rgba(128, 128, 128, 0.302)",
+    paddingHorizontal: 25,
+    paddingVertical: 18,
+    flexDirection: "row",
+    alignItems: "center",
+    width: "90%",
+  },
+
+  input: {
+    flex: 1,
+    fontSize: 18,
+    paddingLeft: 10,
   },
 });
