@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 30,
+    // marginTop: 30,
   },
   header_text: {
     // font milauna xa

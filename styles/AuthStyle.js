@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 100,
+    marginTop: 50,
   },
   brand_name: {
     textAlign: "center",
@@ -33,7 +33,8 @@ export const styles = StyleSheet.create({
     fontSize: 16,
   },
   terms: {
-    marginTop: 20,
+    marginTop: 10,
+
     // fontFamily: "400",
     alignSelf: "center",
   },

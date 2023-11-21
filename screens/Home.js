@@ -6,7 +6,11 @@ import { styles } from "../styles/HomeStyle.js";
 import { FontAwesome } from "@expo/vector-icons";
 import HomeCategoryCard from "../components/HomeCategoryCard.js";
 import HomeEventCard from "../components/HomeEventCard.js";
+import { ContexStore } from "../context/Context.js";
 export default function Home() {
+  // context usecase
+  const { user, setUser } = React.useContext(ContexStore);
+  console.log(user[0]?.name);
   const [category, setcategory] = useState([
     {
       id: 1,
@@ -68,9 +72,11 @@ export default function Home() {
   return (
     <ScrollView>
       <View style={Globalstyle.androidSafeArea}>
-        <View style={{ paddingHorizontal: 13 }}>
+        <View style={{ paddingHorizontal: 13, paddingBottom: 100 }}>
           <View style={styles.header_con}>
-            <Text style={styles.header_text}>Let's Discover</Text>
+            <Text style={styles.header_text}>
+              Let's Discover {user[0]?.name}
+            </Text>
             <View style={styles.img_con}>
               <Image
                 style={styles.img}

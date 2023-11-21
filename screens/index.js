@@ -4,4 +4,5 @@ import Profile from "./Profile";
 import Post from "./Post";
 import Event from "./Event";
 import Register from "./Register";
-export { Home, Register, Feed, Profile, Post, Event };
+import Login from "./Login";
+export { Home, Register, Feed, Profile, Post, Event, Login };
