@@ -15,6 +15,7 @@ export default function ServiceCard({
   store_name,
   store_img,
   service_description,
+  user_profile,
 }) {
   const navigation = useNavigation();
   return (
@@ -23,7 +24,7 @@ export default function ServiceCard({
         <Image
           style={styles.avatar}
           source={{
-            uri: "https://scontent.fbhr4-1.fna.fbcdn.net/v/t39.30808-6/368234669_1011834293341769_8835376727035243512_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=OqRWN0Mim8QAX_oouO4&_nc_ht=scontent.fbhr4-1.fna&oh=00_AfAnBHYwOrJfkcsBOC52GvcT08HEA2ysNB4adXbOn5n-iw&oe=65619CF1",
+            uri: user_profile,
           }}
         />
       </View>
@@ -104,6 +105,7 @@ export default function ServiceCard({
                 store_name,
                 store_img,
                 service_description,
+                user_profile,
               });
             }}
             style={{

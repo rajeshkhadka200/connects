@@ -9,8 +9,8 @@ import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 export default function OthersProfile({ route }) {
   const navigation = useNavigation();
+  console.log("route hahah", route.params.user_profile);
 
-  console.log(route?.params?.store_img);
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -22,7 +22,7 @@ export default function OthersProfile({ route }) {
           <Image
             style={styles.pp}
             source={{
-              uri: "https://scontent.fbhr4-1.fna.fbcdn.net/v/t1.15752-9/370151115_1000485177717616_6978694532350152519_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=2-RxQJ8p6K8AX9AoJMy&_nc_ht=scontent.fbhr4-1.fna&oh=03_AdSviCk9-tmgbjgzCNJbo55KoaEPrPLtf5eaK7Q-tTcgUw&oe=6585D9E4",
+              uri: route.params.user_profile,
             }}
           />
           <Pressable style={styles.camera_con}>

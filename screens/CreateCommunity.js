@@ -25,11 +25,11 @@ export default function CreateCommunity() {
 
   const handleToggle = () => {
     setToggleState(!toggleState);
-    console.log("thsi", toggleState);
   };
   const [businessData, setbusinessData] = useState({
     user_name: user[0]?.name,
     user_phone: user[0]?.number,
+    user_profile: user[0]?.user_profile,
     service_tittle: "",
     service_location: "",
     service_charge: "",

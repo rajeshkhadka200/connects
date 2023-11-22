@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Globalstyle from "../styles/Globalstyle.js";
 import { styles } from "../styles/FeedStyle.js";
 import { FontAwesome } from "@expo/vector-icons";
@@ -16,7 +16,13 @@ import { ContexStore } from "../context/Context.js";
 import * as ImagePicker from "expo-image-picker";
 import { db, st } from "../config/firebase.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { addDoc, collection, updateDoc, doc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  updateDoc,
+  doc,
+  onSnapshot,
+} from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Feed() {
@@ -28,6 +34,7 @@ export default function Feed() {
     user_name: user[0]?.name,
     auth_token: user[0]?.auth_token,
     post: "",
+    user_profile: user[0]?.user_profile,
   });
 
   const [img, setImg] = useState("");
@@ -88,6 +95,25 @@ export default function Feed() {
       }
     });
   };
+  //  fetch the events
+  const [feeddb, setfeedDb] = useState([]);
+  useEffect(() => {
+    const getFeed = async () => {
+      try {
+        onSnapshot(collection(db, "feed"), (snapshot) => {
+          const data = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            oprn_id: doc.id,
+          }));
+          setfeedDb(data);
+        });
+      } catch (error) {
+        console.log("err while geting data", error);
+        alert("err while geting data", error);
+      }
+    };
+    getFeed();
+  }, []);
 
   return (
     <ScrollView style={Globalstyle.androidSafeArea}>
@@ -96,7 +122,7 @@ export default function Feed() {
           <Image
             style={styles.avatar}
             source={{
-              uri: "https://scontent.fbhr4-1.fna.fbcdn.net/v/t39.30808-6/368234669_1011834293341769_8835376727035243512_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=OqRWN0Mim8QAX_oouO4&_nc_ht=scontent.fbhr4-1.fna&oh=00_AfAnBHYwOrJfkcsBOC52GvcT08HEA2ysNB4adXbOn5n-iw&oe=65619CF1",
+              uri: user[0]?.user_profile,
             }}
           />
         </View>
@@ -175,7 +201,7 @@ export default function Feed() {
         </View>
         <TouchableOpacity
           onPress={() => {
-            PostFeed();
+            PostFeed;
           }}
           style={{
             backgroundColor: "#f4b400",
@@ -192,6 +218,71 @@ export default function Feed() {
             Share
           </Text>
         </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          marginTop: 10,
+        }}
+      >
+        {feeddb?.map((item, index) => (
+          <View
+            key={index}
+            style={{
+              ...styles.feed_con,
+              flexDirection: "row",
+              marginBottom: 10,
+            }}
+          >
+            {/* left */}
+            <Image
+              style={{
+                height: 50,
+                width: 50,
+                borderRadius: 50,
+                marginRight: 10,
+              }}
+              source={{
+                uri: item?.user_profile,
+              }}
+            />
+            <View
+              style={{
+                flex: 1,
+                fontSize: 15,
+              }}
+            >
+              <Text>{item?.user_name}</Text>
+              <Text
+                style={{
+                  color: "grey",
+                  fontSize: 12,
+                }}
+              >
+                {item?.timestamp}
+              </Text>
+
+              <Text
+                style={{
+                  marginTop: 10,
+                }}
+              >
+                {item?.post}
+              </Text>
+              <Image
+                style={{
+                  marginTop: 20,
+                  height: 200,
+                  width: "100%",
+                  borderRadius: 10,
+                  resizeMode: "cover",
+                }}
+                source={{
+                  uri: item?.feed_thumbnail,
+                }}
+              />
+            </View>
+          </View>
+        ))}
       </View>
     </ScrollView>
   );

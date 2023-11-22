@@ -23,4 +23,11 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingBottom: 10,
   },
+
+  feed_con: {
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
 });

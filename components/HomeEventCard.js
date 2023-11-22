@@ -16,6 +16,7 @@ export default function HomeEventCard({
   profile,
   date,
   price,
+  user_profile,
 }) {
   const navigation = useNavigation();
   return (
@@ -50,7 +51,7 @@ export default function HomeEventCard({
               <Image
                 style={styles.avatar}
                 source={{
-                  uri: profile,
+                  uri: user_profile,
                 }}
               />
             </View>

@@ -23,6 +23,7 @@ function Post() {
   const navigation = useNavigation();
   // context usecase
   const { user, setUser } = React.useContext(ContexStore);
+  console.log(user[0]?.user_profile);
   const [toggleState, setToggleState] = useState(true);
   //  business true
   // event false
@@ -45,6 +46,7 @@ function Post() {
   const [eventData, seteventData] = useState({
     user_name: user[0]?.name,
     user_phone: user[0]?.number,
+    user_profile: user[0]?.user_profile,
     evt_tittle: "",
     evt_location: "",
     evt_date: "",

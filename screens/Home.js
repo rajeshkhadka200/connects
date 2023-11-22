@@ -116,6 +116,7 @@ export default function Home() {
                 cate_image={item.store_img}
                 name={item.service_tittle}
                 date={item.date}
+                user_profile={item.user_profile}
               />
             ))}
           </ScrollView>
@@ -139,6 +140,7 @@ export default function Home() {
                 date={item.evt_date}
                 price={item.evt_price}
                 address={item.evt_location}
+                user_profile={item.user_profile}
               />
             ))}
           </ScrollView>

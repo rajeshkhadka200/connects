@@ -13,6 +13,7 @@ import { ContexStore } from "../context/Context.js";
 import ServiceCard from "../components/ServiceCard.js";
 
 const AllCateGoriesProfile = ({ route }) => {
+  console.log("route", route);
   const { user, setUser, servicePerson, setservicePerson } =
     React.useContext(ContexStore);
 
@@ -20,6 +21,7 @@ const AllCateGoriesProfile = ({ route }) => {
   const specificService = servicePerson.filter(
     (item) => item.service_tittle === route.params.name
   );
+  console.log("specificService", specificService);
   const navigation = useNavigation();
   return (
     <ScrollView style={Globalstyle.androidSafeArea}>
@@ -50,6 +52,7 @@ const AllCateGoriesProfile = ({ route }) => {
                 store_name={item.store_name}
                 user_phone={item.user_phone}
                 service_description={item.service_description}
+                user_profile={item.user_profile}
               />
             ))}
           </View>
