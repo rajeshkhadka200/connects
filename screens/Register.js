@@ -8,11 +8,10 @@ import {
   ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Globalstyle from "../styles/Globalstyle.js";
 import { styles } from "../styles/AuthStyle.js";
 import { Entypo } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
 import { ContexStore } from "../context/Context";
 import { FontAwesome5 } from "@expo/vector-icons";
 // firebase database

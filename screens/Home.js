@@ -1,49 +1,34 @@
 import React from "react";
-import { Text, View, Image, TextInput, ScrollView } from "react-native";
-import { useState } from "react";
+import {
+  Text,
+  View,
+  Image,
+  TextInput,
+  ScrollView,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useState, useEffect } from "react";
 import Globalstyle from "../styles/Globalstyle.js";
 import { styles } from "../styles/HomeStyle.js";
 import { FontAwesome } from "@expo/vector-icons";
 import HomeCategoryCard from "../components/HomeCategoryCard.js";
 import HomeEventCard from "../components/HomeEventCard.js";
 import { ContexStore } from "../context/Context.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Entypo } from "@expo/vector-icons";
 export default function Home() {
   // context usecase
-  const { user, setUser } = React.useContext(ContexStore);
-  console.log(user[0]?.name);
-  const [category, setcategory] = useState([
-    {
-      id: 1,
-      cate_image:
-        "https://bl-i.thgim.com/public/opinion/rgb32v/article28562857.ece/alternates/FREE_1200/BL19THINK2FERTILISER5",
-      name: "Agriculture",
-    },
-    {
-      id: 4,
-      cate_image:
-        "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?cs=srgb&dl=pexels-ella-olsson-1640772.jpg&fm=jpg",
-      name: "Resturants",
-    },
-    {
-      id: 2,
-      cate_image:
-        "https://i.pinimg.com/736x/84/70/94/847094a5d2df67f4fc7a7a6b77bcfe7b.jpg",
-      name: "Travels",
-    },
-    {
-      id: 3,
-      cate_image:
-        "https://wallpapers.com/images/hd/plumbing-1500-x-700-picture-8xzg8nm0ql3dg9qr.jpg",
-      name: "Services",
-    },
+  const { user, setUser, servicePerson, setservicePerson } =
+    React.useContext(ContexStore);
 
-    {
-      id: 5,
-      cate_image:
-        "https://media.istockphoto.com/id/1446229465/photo/red-heart-and-stethoscope-are-on-blue-background.webp?b=1&s=170667a&w=0&k=20&c=1-aE7XV24f8qVr8fGnpvypir8fSxYaM9sHZurKoutj8=",
-      name: "Health",
-    },
-  ]);
+  // filter from and give array of an obj service person which have unique service_tittle
+  const cate = [
+    ...new Map(
+      servicePerson.map((item) => [item["service_tittle"], item])
+    ).values(),
+  ];
 
   // event card
   const [event, setEvent] = useState([
@@ -69,20 +54,41 @@ export default function Home() {
       price: "Rs.5000",
     },
   ]);
+
+  const navigation = useNavigation();
   return (
     <ScrollView>
       <View style={Globalstyle.androidSafeArea}>
         <View style={{ paddingHorizontal: 13, paddingBottom: 100 }}>
           <View style={styles.header_con}>
-            <Text style={styles.header_text}>
-              Let's Discover {user[0]?.name}
-            </Text>
-            <View style={styles.img_con}>
-              <Image
-                style={styles.img}
-                source={require("../assets/avatar.png")}
-              />
+            <View style={styles.left_header}>
+              <Text
+                style={{
+                  fontSize: 25,
+                  fontWeight: "bold",
+                }}
+              >
+                Lets discover
+              </Text>
+              <Text
+                style={{
+                  fontSize: 20,
+                }}
+              >
+                Butwal
+              </Text>
             </View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Location")}
+              style={{
+                ...styles.right_header,
+                backgroundColor: "#e4e6eb",
+                padding: 10,
+                borderRadius: 50,
+              }}
+            >
+              <Entypo name="location-pin" size={24} color="grey" />
+            </TouchableOpacity>
           </View>
 
           {/* search */}
@@ -104,12 +110,12 @@ export default function Home() {
             </View>
           </View>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {category.map((item) => (
+            {cate.map((item) => (
               <HomeCategoryCard
-                key={item.id}
-                id={item.id}
-                cate_image={item.cate_image}
-                name={item.name}
+                key={item.oprn_id}
+                id={item.oprn_id}
+                cate_image={item.store_img}
+                name={item.service_tittle}
                 date={item.date}
               />
             ))}
@@ -117,7 +123,7 @@ export default function Home() {
           {/* up comming event  */}
           <View style={styles.cate_con}>
             <View>
-              <Text style={styles.cate_heading}>Upcoming Events</Text>
+              <Text style={styles.cate_heading}>Local Events</Text>
             </View>
             <View>
               <Text style={styles.cate_see_all}>See all</Text>

@@ -1,10 +1,77 @@
-import { View, Text } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+  FlatList,
+} from "react-native";
+import { Entypo } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-
+import Globalstyle from "../styles/Globalstyle.js";
+import { styles } from "../styles/ProfileStyle.js";
+import { useNavigation } from "@react-navigation/native";
+import { ContexStore } from "../context/Context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Transaction() {
+  const navigation = useNavigation();
+  const { user, setUser } = React.useContext(ContexStore);
+  const Logout = async () => {
+    try {
+      await AsyncStorage.removeItem("auth_token");
+      setUser([]);
+      navigation.navigate("Home");
+    } catch (error) {
+      console.log("err in logout", error);
+    }
+  };
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Profile</Text>
-    </View>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={{ backgroundColor: "#fff" }}
+    >
+      <View style={styles.header}>
+        <View style={styles.cover_bg}></View>
+        <View>
+          <Image
+            style={styles.pp}
+            source={{
+              uri: "https://scontent.fbhr4-1.fna.fbcdn.net/v/t39.30808-6/368234669_1011834293341769_8835376727035243512_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=OqRWN0Mim8QAX_oouO4&_nc_ht=scontent.fbhr4-1.fna&oh=00_AfAnBHYwOrJfkcsBOC52GvcT08HEA2ysNB4adXbOn5n-iw&oe=65619CF1",
+            }}
+          />
+          <Pressable style={styles.camera_con}>
+            <Entypo name="camera" size={20} color="black" />
+          </Pressable>
+        </View>
+        <Text style={styles.profile_name}>{user[0]?.name}</Text>
+      </View>
+      <View style={styles.bottom_con}>
+        <View style={styles.btn_con}>
+          <Pressable
+            style={styles.btn1}
+            onPress={() => navigation.navigate("Create")}
+          >
+            <FontAwesome5
+              name="pen"
+              size={16}
+              color="#fff"
+              style={{ marginRight: 5 }}
+            />
+            <Text style={styles.text1}>Add</Text>
+          </Pressable>
+          <Pressable onPress={Logout} style={styles.btn2}>
+            <Text style={styles.text2}>LogOut</Text>
+            <MaterialIcons
+              name="logout"
+              size={18}
+              color="#000"
+              style={{ marginLeft: 5 }}
+            />
+          </Pressable>
+        </View>
+      </View>
+    </ScrollView>
   );
 }

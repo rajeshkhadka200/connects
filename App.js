@@ -9,6 +9,9 @@ import Context, { ContexStore } from "./context/Context.js";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Create from "./screens/CreateCommunity.js";
+import AllCateGoriesProfile from "./screens/AllCateGoriesProfile.js";
+import MapLoc from "./screens/MapLoc.js";
 const screenOptions = {
   tabBarShowLabel: false,
   headerShown: true,
@@ -24,11 +27,9 @@ const screenOptions = {
 };
 function Tabs() {
   const [isLogin, setisLogin] = useState();
-  useEffect(() => {
-    const token = AsyncStorage.getItem("auth_token");
-    setisLogin(token);
-  }, []);
 
+  const { user, setUser } = React.useContext(ContexStore);
+  // console.log("user", user);
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator screenOptions={screenOptions}>
@@ -96,7 +97,7 @@ function Tabs() {
                   backgroundColor: "#f4b400",
                   width: Platform.OS == "ios" ? 50 : 60,
                   height: Platform.OS == "ios" ? 50 : 60,
-                  top: Platform.OS == "ios" ? -10 : -20,
+                  top: Platform.OS == "ios" ? -10 : -15,
                   borderRadius: Platform.OS == "ios" ? 25 : 30,
                 }}
               >
@@ -132,8 +133,8 @@ function Tabs() {
         }}
       />
       <Tab.Screen
-        name={isLogin ? "Profile" : "Register"}
-        component={isLogin ? Profile : Register}
+        name={user.length > 0 ? "Profile" : "Register"}
+        component={user.length > 0 ? Profile : Register}
         options={{
           tabBarIcon: ({ focused }) => {
             return (
@@ -149,7 +150,7 @@ function Tabs() {
                     color: focused ? "#f4b400" : "rgba(0, 0, 0, 0.3)",
                   }}
                 >
-                  {isLogin ? "Profile" : "User"}
+                  {user.length > 0 ? "Profile" : "User"}
                 </Text>
               </View>
             );
@@ -172,6 +173,9 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Create" component={Create} />
+          <Stack.Screen name="Location" component={MapLoc} />
+          <Stack.Screen name="Service" component={AllCateGoriesProfile} />
         </Stack.Navigator>
       </NavigationContainer>
     </Context>

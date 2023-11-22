@@ -6,6 +6,7 @@ export const ContexStore = createContext();
 const Context = ({ children }) => {
   // user context
   const [user, setUser] = useState([]);
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -25,12 +26,33 @@ const Context = ({ children }) => {
     };
     fetchUser();
   }, []);
-  console.log(user);
+
+  //  fetch the service_person
+  const [servicePerson, setservicePerson] = useState([]);
+  useEffect(() => {
+    const getServicePerson = async () => {
+      try {
+        onSnapshot(collection(db, "service_person"), (snapshot) => {
+          const data = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            oprn_id: doc.id,
+          }));
+          setservicePerson(data);
+        });
+      } catch (error) {
+        alert("err while geting data", error);
+      }
+    };
+    getServicePerson();
+  }, []);
+
   return (
     <ContexStore.Provider
       value={{
         user,
         setUser,
+        servicePerson,
+        setservicePerson,
       }}
     >
       {children}

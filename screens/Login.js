@@ -28,7 +28,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ContexStore } from "../context/Context.js";
 
 export default function Login() {
-  const { user, setUser } = useContext(ContexStore);
+  const { user, setUser } = React.useContext(ContexStore);
   const fetchUser = async () => {
     try {
       const token = await AsyncStorage.getItem("auth_token");
@@ -53,7 +53,7 @@ export default function Login() {
         alert("please fill all the fields");
         return;
       }
-      const q = query(collection(db, "users"), where("phone", "==", phone));
+      const q = query(collection(db, "users"), where("number", "==", phone));
       const querySnapshot = await getDocs(q);
       if (querySnapshot.empty) {
         alert("User not found");
