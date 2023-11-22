@@ -20,8 +20,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Entypo } from "@expo/vector-icons";
 export default function Home() {
   // context usecase
-  const { user, setUser, servicePerson, setservicePerson } =
-    React.useContext(ContexStore);
+  const { user, servicePerson, event } = React.useContext(ContexStore);
 
   // filter from and give array of an obj service person which have unique service_tittle
   const cate = [
@@ -31,29 +30,29 @@ export default function Home() {
   ];
 
   // event card
-  const [event, setEvent] = useState([
-    {
-      id: 1,
-      tittle: "Taylor Swift Live  Concert",
-      banner: "https://i.ytimg.com/vi/KudedLV0tP0/maxresdefault.jpg",
-      profile:
-        "https://media.istockphoto.com/id/1147066751/photo/hispanic-adult-standing-outside-and-smiling.jpg?s=612x612&w=0&k=20&c=5BWiJRFV-eqg7gDFlu8khQ7Eol_dvsip0Ds2p_zDwAo=",
-      date: "2021-09-12",
-      location: "Kathmandu",
-      price: "250",
-    },
-    {
-      id: 2,
-      tittle: "Arijit Singh Live in Concert",
-      banner:
-        "https://media.insider.in/image/upload/c_crop,g_custom/v1651037876/js8fhetpguw6s08cfrg4.jpg",
-      profile:
-        "https://scontent.fbhr4-1.fna.fbcdn.net/v/t39.30808-6/368234669_1011834293341769_8835376727035243512_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=JXMxwj6-xssAX9D7bfp&_nc_ht=scontent.fbhr4-1.fna&oh=00_AfBQgN7QG3kcqQIgNeFmElBK2F1wewFNPPTrnfQdjOZgGQ&oe=65619CF1",
-      date: "2021-09-12",
-      location: "Kathmandu",
-      price: "Rs.5000",
-    },
-  ]);
+  // const [event, setEvent] = useState([
+  //   {
+  //     id: 1,
+  //     tittle: "Taylor Swift Live  Concert",
+  //     banner: "https://i.ytimg.com/vi/KudedLV0tP0/maxresdefault.jpg",
+  //     profile:
+  //       "https://media.istockphoto.com/id/1147066751/photo/hispanic-adult-standing-outside-and-smiling.jpg?s=612x612&w=0&k=20&c=5BWiJRFV-eqg7gDFlu8khQ7Eol_dvsip0Ds2p_zDwAo=",
+  //     date: "2021-09-12",
+  //     location: "Kathmandu",
+  //     price: "250",
+  //   },
+  //   {
+  //     id: 2,
+  //     tittle: "Arijit Singh Live in Concert",
+  //     banner:
+  //       "https://media.insider.in/image/upload/c_crop,g_custom/v1651037876/js8fhetpguw6s08cfrg4.jpg",
+  //     profile:
+  //       "https://scontent.fbhr4-1.fna.fbcdn.net/v/t39.30808-6/368234669_1011834293341769_8835376727035243512_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=JXMxwj6-xssAX9D7bfp&_nc_ht=scontent.fbhr4-1.fna&oh=00_AfBQgN7QG3kcqQIgNeFmElBK2F1wewFNPPTrnfQdjOZgGQ&oe=65619CF1",
+  //     date: "2021-09-12",
+  //     location: "Kathmandu",
+  //     price: "Rs.5000",
+  //   },
+  // ]);
 
   const navigation = useNavigation();
   return (
@@ -123,7 +122,7 @@ export default function Home() {
           {/* up comming event  */}
           <View style={styles.cate_con}>
             <View>
-              <Text style={styles.cate_heading}>Local Events</Text>
+              <Text style={styles.cate_heading}>Upcomming Events</Text>
             </View>
             <View>
               <Text style={styles.cate_see_all}>See all</Text>
@@ -133,13 +132,13 @@ export default function Home() {
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {event.map((item) => (
               <HomeEventCard
-                key={item.id}
-                id={item.id}
-                banner={item.banner}
+                key={item.timestamp}
+                banner={item.thumbnail}
                 profile={item.profile}
-                tittle={item.tittle}
-                price={item.price}
-                address={item.address}
+                tittle={item.evt_tittle}
+                date={item.evt_date}
+                price={item.evt_price}
+                address={item.evt_location}
               />
             ))}
           </ScrollView>

@@ -13,6 +13,7 @@ import Create from "./screens/CreateCommunity.js";
 import AllCateGoriesProfile from "./screens/AllCateGoriesProfile.js";
 import OthersProfile from "./screens/OthersProfile.js";
 import MapLoc from "./screens/MapLoc.js";
+import EventDetails from "./screens/EventDetails.js";
 const screenOptions = {
   tabBarShowLabel: false,
   headerShown: true,
@@ -178,6 +179,7 @@ export default function App() {
           <Stack.Screen name="Location" component={MapLoc} />
           <Stack.Screen name="Service" component={AllCateGoriesProfile} />
           <Stack.Screen name="Hire" component={OthersProfile} />
+          <Stack.Screen name="Details" component={EventDetails} />
         </Stack.Navigator>
       </NavigationContainer>
     </Context>

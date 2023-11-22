@@ -45,7 +45,25 @@ const Context = ({ children }) => {
     };
     getServicePerson();
   }, []);
-
+  //  fetch the events
+  const [event, setEvent] = useState([]);
+  useEffect(() => {
+    const getEvent = async () => {
+      try {
+        onSnapshot(collection(db, "events"), (snapshot) => {
+          const data = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            oprn_id: doc.id,
+          }));
+          setEvent(data);
+        });
+      } catch (error) {
+        alert("err while geting data", error);
+      }
+    };
+    getEvent();
+  }, []);
+  console.log("event", event);
   return (
     <ContexStore.Provider
       value={{
@@ -53,6 +71,8 @@ const Context = ({ children }) => {
         setUser,
         servicePerson,
         setservicePerson,
+        event,
+        setEvent,
       }}
     >
       {children}

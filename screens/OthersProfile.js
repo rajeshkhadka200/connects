@@ -6,6 +6,7 @@ import Globalstyle from "../styles/Globalstyle.js";
 import { styles } from "../styles/OtherProfStyle.js";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 export default function OthersProfile({ route }) {
   const navigation = useNavigation();
 
@@ -21,7 +22,7 @@ export default function OthersProfile({ route }) {
           <Image
             style={styles.pp}
             source={{
-              uri: "https://scontent.fbhr4-1.fna.fbcdn.net/v/t39.30808-6/368234669_1011834293341769_8835376727035243512_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=OqRWN0Mim8QAX_oouO4&_nc_ht=scontent.fbhr4-1.fna&oh=00_AfAnBHYwOrJfkcsBOC52GvcT08HEA2ysNB4adXbOn5n-iw&oe=65619CF1",
+              uri: "https://scontent.fbhr4-1.fna.fbcdn.net/v/t1.15752-9/370151115_1000485177717616_6978694532350152519_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=2-RxQJ8p6K8AX9AoJMy&_nc_ht=scontent.fbhr4-1.fna&oh=03_AdSviCk9-tmgbjgzCNJbo55KoaEPrPLtf5eaK7Q-tTcgUw&oe=6585D9E4",
             }}
           />
           <Pressable style={styles.camera_con}>
@@ -47,11 +48,11 @@ export default function OthersProfile({ route }) {
           <Pressable style={styles.btn2}>
             <Text style={styles.text2}>Call</Text>
 
-            <Entypo
+            <Ionicons
               style={{ marginLeft: 5 }}
-              name="chat"
               size={18}
               color="#f4b400"
+              name="call-outline"
             />
           </Pressable>
         </View>

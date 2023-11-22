@@ -8,11 +8,87 @@ import {
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import React from "react";
+import React, { useState } from "react";
 import Globalstyle from "../styles/Globalstyle.js";
 import { styles } from "../styles/FeedStyle.js";
 import { FontAwesome } from "@expo/vector-icons";
-export default function Portfolio() {
+import { ContexStore } from "../context/Context.js";
+import * as ImagePicker from "expo-image-picker";
+import { db, st } from "../config/firebase.js";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { addDoc, collection, updateDoc, doc } from "firebase/firestore";
+import { useNavigation } from "@react-navigation/native";
+
+export default function Feed() {
+  const navigation = useNavigation();
+
+  const { user, setUser } = React.useContext(ContexStore);
+  console.log("user", user);
+  const [toPostFeed, settoPostFeed] = React.useState({
+    user_name: user[0]?.name,
+    auth_token: user[0]?.auth_token,
+    post: "",
+  });
+
+  const [img, setImg] = useState("");
+  const imageUpload = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.photo,
+      allowsEditing: false,
+      aspect: [4, 3],
+      quality: 0.8,
+    });
+    setImg(result?.assets[0]?.uri);
+  };
+
+  const PostFeed = async () => {
+    if (toPostFeed.post == "" || img == "") {
+      alert("Post at least one image and text");
+      return;
+    }
+    const docRef = await addDoc(collection(db, "feed"), {
+      ...toPostFeed,
+      timestamp: Date.now(),
+    });
+    if (!docRef.id) {
+      return alert("Error while uploading");
+    }
+
+    const metadata = {
+      contentType: "image/jpeg",
+    };
+    const blob = await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+      xhr.onerror = function (e) {
+        reject(new TypeError("Network request failed"));
+      };
+      xhr.responseType = "blob";
+      xhr.open("GET", img, true);
+      xhr.send(null);
+    });
+
+    const imageRef = ref(st, `images/${Date.now()}-connectsfeed`);
+    await uploadBytes(imageRef, blob, metadata).then(async () => {
+      const downloadURL = await getDownloadURL(imageRef);
+      await updateDoc(doc(db, "feed", docRef.id), {
+        feed_thumbnail: downloadURL,
+      });
+      if (downloadURL) {
+        alert("Posted Successfully");
+        setImg("");
+        settoPostFeed({
+          user_name: user[0]?.name,
+          auth_token: user[0]?.auth_token,
+          post: "",
+        });
+        return navigation.navigate("Home");
+      }
+    });
+  };
+
   return (
     <ScrollView style={Globalstyle.androidSafeArea}>
       <View style={{ ...styles.feed_header }}>
@@ -26,20 +102,36 @@ export default function Portfolio() {
         </View>
         <View
           style={{
-            // backgroundColor: "blue",
             flex: 1,
           }}
         >
           <TextInput
+            onChangeText={(text) =>
+              settoPostFeed({ ...toPostFeed, post: text })
+            }
             placeholder="What's on your mind?"
             multiline={true}
             style={{
               fontSize: 18,
-              // height: 100,
             }}
           />
+          {img && (
+            <Image
+              style={{
+                marginTop: 20,
+                height: 200,
+                width: "100%",
+                borderRadius: 10,
+                resizeMode: "cover",
+              }}
+              source={{
+                uri: img,
+              }}
+            />
+          )}
         </View>
       </View>
+
       <View style={styles.header_button_sec}>
         <View
           style={{
@@ -48,6 +140,9 @@ export default function Portfolio() {
           }}
         >
           <TouchableOpacity
+            onPress={() => {
+              imageUpload();
+            }}
             style={{
               marginRight: 5,
               padding: 10,
@@ -79,6 +174,9 @@ export default function Portfolio() {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
+          onPress={() => {
+            PostFeed();
+          }}
           style={{
             backgroundColor: "#f4b400",
             paddingHorizontal: 20,
