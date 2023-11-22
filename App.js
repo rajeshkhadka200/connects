@@ -11,6 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Create from "./screens/CreateCommunity.js";
 import AllCateGoriesProfile from "./screens/AllCateGoriesProfile.js";
+import OthersProfile from "./screens/OthersProfile.js";
 import MapLoc from "./screens/MapLoc.js";
 const screenOptions = {
   tabBarShowLabel: false,
@@ -176,6 +177,7 @@ export default function App() {
           <Stack.Screen name="Create" component={Create} />
           <Stack.Screen name="Location" component={MapLoc} />
           <Stack.Screen name="Service" component={AllCateGoriesProfile} />
+          <Stack.Screen name="Hire" component={OthersProfile} />
         </Stack.Navigator>
       </NavigationContainer>
     </Context>

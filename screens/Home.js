@@ -34,13 +34,13 @@ export default function Home() {
   const [event, setEvent] = useState([
     {
       id: 1,
-      tittle: "Arijit Singh Live in Concert",
-      banner: "https://exclaim.ca/images/honeyjamconcert_editorial.jpg",
+      tittle: "Taylor Swift Live  Concert",
+      banner: "https://i.ytimg.com/vi/KudedLV0tP0/maxresdefault.jpg",
       profile:
-        "https://scontent.fbhr4-1.fna.fbcdn.net/v/t39.30808-6/368234669_1011834293341769_8835376727035243512_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=JXMxwj6-xssAX9D7bfp&_nc_ht=scontent.fbhr4-1.fna&oh=00_AfBQgN7QG3kcqQIgNeFmElBK2F1wewFNPPTrnfQdjOZgGQ&oe=65619CF1",
+        "https://media.istockphoto.com/id/1147066751/photo/hispanic-adult-standing-outside-and-smiling.jpg?s=612x612&w=0&k=20&c=5BWiJRFV-eqg7gDFlu8khQ7Eol_dvsip0Ds2p_zDwAo=",
       date: "2021-09-12",
       location: "Kathmandu",
-      price: "Rs.5000",
+      price: "250",
     },
     {
       id: 2,
@@ -87,13 +87,13 @@ export default function Home() {
                 borderRadius: 50,
               }}
             >
-              <Entypo name="location-pin" size={24} color="grey" />
+              <Entypo name="location-pin" size={24} color="#f4b400" />
             </TouchableOpacity>
           </View>
 
           {/* search */}
           <View style={styles.searchBar}>
-            <FontAwesome name="search" size={24} color="grey" />
+            <FontAwesome name="search" size={24} color="#f4b400" />
             <TextInput
               style={styles.input}
               placeholder="Search the local business"

@@ -4,13 +4,19 @@ import React from "react";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 export default function ServiceCard({
   id,
   user_name,
   service_charge,
   service_tittle,
   service_location,
+  user_phone,
+  store_name,
+  store_img,
+  service_description,
 }) {
+  const navigation = useNavigation();
   return (
     <View style={styles.card_service}>
       <View style={styles.left_service}>
@@ -87,6 +93,19 @@ export default function ServiceCard({
           }}
         >
           <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Hire", {
+                id,
+                user_name,
+                service_charge,
+                service_tittle,
+                service_location,
+                user_phone,
+                store_name,
+                store_img,
+                service_description,
+              });
+            }}
             style={{
               backgroundColor: "#f4b400",
               paddingVertical: 5,

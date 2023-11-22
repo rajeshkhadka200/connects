@@ -1,4 +1,10 @@
-import { View, Text, ScrollView, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import { styles } from "../styles/AllCateGortStyle.js";
 import { useNavigation } from "@react-navigation/native";
@@ -14,7 +20,7 @@ const AllCateGoriesProfile = ({ route }) => {
   const specificService = servicePerson.filter(
     (item) => item.service_tittle === route.params.name
   );
-
+  const navigation = useNavigation();
   return (
     <ScrollView style={Globalstyle.androidSafeArea}>
       <Pressable>
@@ -40,6 +46,10 @@ const AllCateGoriesProfile = ({ route }) => {
                 service_charge={item.service_charge}
                 service_tittle={item.service_tittle}
                 service_location={item.service_location}
+                store_img={item.store_img}
+                store_name={item.store_name}
+                user_phone={item.user_phone}
+                service_description={item.service_description}
               />
             ))}
           </View>

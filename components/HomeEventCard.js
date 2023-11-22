@@ -39,8 +39,8 @@ export default function HomeEventCard({
             />
           </View>
           <View>
-            <Text style={styles.dec_address}> {location}</Text>
-            <Text style={styles.dec_price}>{price}</Text>
+            <Text style={styles.dec_address}>{tittle}</Text>
+            <Text style={styles.dec_price}>$ {price}</Text>
           </View>
         </View>
       </View>
